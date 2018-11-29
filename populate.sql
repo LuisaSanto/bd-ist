@@ -1,4 +1,4 @@
-insert into camara values ()  -- etc ;
+insert into camara values ();
 
 insert into video values ()  ;
 
