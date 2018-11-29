@@ -63,12 +63,12 @@ def populatecamara(f, i, j):
 
 
 def populatevideo(f, i, j, times):
-    f.write("insert into {} values ('{}', '{}', {});\n".format(i, times[j-1].replace(microsecond=0), times[j].replace(microsecond=0), j + 1))
+    f.write("insert into {} values ('{}', '{}', {});\n".format(i, times[j].replace(microsecond=0), times[j+1].replace(microsecond=0), j + 1))
 
 
 def populatesegmentovideo(f, i, j, times):
-    interval = times[j].replace(microsecond=0) - times[j-1].replace(microsecond=0)
-    f.write("insert into {} values ('{}', '{}', '{}', {});\n".format(i, j + 1, interval, times[j-1].replace(microsecond=0), j + 1))
+    interval = times[j+1].replace(microsecond=0) - times[j].replace(microsecond=0)
+    f.write("insert into {} values ({}, '{}', '{}', {});\n".format(i, j + 1, interval, times[j].replace(microsecond=0), j + 1))
 
 
 def populatelocal(f, i, j):
@@ -76,12 +76,12 @@ def populatelocal(f, i, j):
 
 
 def populatevigia(f, i, j):
-    f.write("insert into {} values ('{}', '{}');\n".format(i, "address"+str(j+1), j + 1))
+    f.write("insert into {} values ('{}', {});\n".format(i, "address"+str(j+1), j + 1))
 
 
 def populateeventoemergencia(f, i, j, numbers, names, times):
-    interval = times[j].replace(microsecond=0) - times[j-1].replace(microsecond=0)
-    f.write("insert into {} values ({}, '{}', '{}', '{}', '{}');\n".format(i, \
+    interval = times[j+1].replace(microsecond=0) - times[j].replace(microsecond=0)
+    f.write("insert into {} values ({}, '{}', '{}', '{}', {});\n".format(i, \
         numbers[j], interval, names[j], "address"+str(j+1), j + 1))
 
 
@@ -143,26 +143,26 @@ def populatecoordenador(f, i, j):
 
 
 def populateaudita(f, i, j, entities, entity_names):
-    times_h = randomtimes("13:28:00 2019-01-01", "08:50:34 2019-03-02", '%H:%M:%S %Y-%m-%d', 100)
+    times_h = randomtimes("13:28:00 2019-01-01", "08:50:34 2019-03-02", '%H:%M:%S %Y-%m-%d', 101)
     f.write("insert into {} values ({}, {}, '{}', {}, '{}', '{}', '{}','{}');\n".format(i, j+1, j+1, \
         entities[j], j+1, \
-        times_h[j-1].replace(microsecond=0), \
         times_h[j].replace(microsecond=0), \
-        str(times_h[j-1].replace(microsecond=0))[:10], \
-        "Auditoria do processo " + str(j+1) + " que comecou no dia " + str(times_h[j-1].replace(microsecond=0)) \
-        + " e acabou no dia " + str(times_h[j].replace(microsecond=0)) + " da entidade " + \
+        times_h[j+1].replace(microsecond=0), \
+        str(times_h[j].replace(microsecond=0))[:10], \
+        "Auditoria do processo " + str(j+1) + " que comecou no dia " + str(times_h[j].replace(microsecond=0)) \
+        + " e acabou no dia " + str(times_h[j+1].replace(microsecond=0)) + " da entidade " + \
         str(entities[j]) + " do Meio de " + str(entity_names[j]) ))
 
 
 def populatesolicita(f, i, j, times):
-    times_h = randomtimes("13:28:00 2019-02-01", "08:50:34 2019-03-02", '%H:%M:%S %Y-%m-%d', 100)
-    f.write("insert into {} values ({}, '{}', {}, '{}', '{}');\n".format(i, j+1, times[j-1].replace(microsecond=0), \
-        j+1, times_h[j-1].replace(microsecond=0), times_h[j].replace(microsecond=0)))
+    times_h = randomtimes("13:28:00 2019-02-01", "08:50:34 2019-03-02", '%H:%M:%S %Y-%m-%d', 101)
+    f.write("insert into {} values ({}, '{}', {}, '{}', '{}');\n".format(i, j+1, times[j].replace(microsecond=0), \
+        j+1, times_h[j].replace(microsecond=0), times_h[j+1].replace(microsecond=0)))
 
 
 def main():
     frmt = '%H:%M:%S %Y-%m-%d'
-    times = randomtimes("13:30:00 2018-01-20", "04:50:34 2018-01-30", frmt, 100)
+    times = randomtimes("13:30:00 2018-01-20", "04:50:34 2018-01-30", frmt, 101)
     numbers = randomphones(9, 1000)
     names = generatelistname(1000)
     entities = generatelistentity(1000)
