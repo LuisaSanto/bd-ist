@@ -22,7 +22,7 @@ drop table if exists solicita;
 ------------------------------------------------
 
 
-create table camara
+create table camara 
 	( numCamara numeric(3) not null unique,
 	  constraint pk_camara primary key(numCamara) 
 	);
@@ -124,6 +124,7 @@ create table transporta
 create table alocado 
 	( numMeio numeric(100) not null,
 	  nomeEntidade varchar(255) not null, -- FIXME: unique ??
+	  numHoras numeric(3) not null,
 	  numProcessoSocorro numeric(100) not null,
 	  constraint fk_alocado_meio foreign key(numMeio) references meioApoio(numMeio),
 	  constraint fk_alocado_meio foreign key(nomeEntidade) references meioApoio(nomeEntidade),
