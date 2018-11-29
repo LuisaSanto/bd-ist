@@ -5,7 +5,7 @@ drop table if exists local;
 drop table if exists vigia;
 drop table if exists eventoEmergencia;
 drop table if exists processoSocorro;
-drop table if exists entidadeMeio;
+drop table if exists entidadeMeio; 
 drop table if exists meio;
 drop table if exists meioCombate;
 drop table if exists meioApoio;
@@ -28,8 +28,8 @@ create table camara
 	);
 
 create table video 
-	( dataHoraInicio datetime not null unique,
-	  dataHoraFim datetime not null,
+	( dataHoraInicio timestamp not null unique,
+	  dataHoraFim timestamp not null,
 	  numCamara numeric(3) not null unique,
 	  constraint pk_video primary key(dataHoraInicio),
 	  constraint fk_video_camara foreign key(numCamara) references camara(numCamara)
@@ -37,8 +37,8 @@ create table video
 
 create table segmentoVideo 
 	( numSegmento numeric(4) not null unique,
-	  duracao interval not null, -- FIXME: nao sei se deve ser numeric, datetime ou interval?
-	  dataHoraInicio datetime not null unique,
+	  duracao time not null, -- FIXME: nao sei se deve ser numeric, timestamp ou time?
+	  dataHoraInicio timestamp not null unique,
 	  numCamara numeric(3) not null unique,
 	  constraint fk_segmentoVideo_video foreign key(dataHoraInicio) references video(dataHoraInicio),
 	  constraint fk_segmentoVideo_video foreign key(numCamara) references video(numCamara)
@@ -58,7 +58,7 @@ create table vigia
 
 create table eventoEmergencia 
 	( numTelefone numeric(15) not null unique,
-	  instanteChamada timestamp not null,
+	  instanteChamada time not null,
 	  nomePessoa varchar(80) not null unique,
 	  moradaLocal varchar(255) not null,
 	  numProcessoSocorro numeric(100) not null, --FIXME: verificar este valor do numeric. -- RI:pode ser vazio/null
@@ -150,8 +150,8 @@ create table audita
 	  numMeio numeric(100) not null,
 	  nomeEntidade varchar(255) not null, -- FIXME: unique ??
 	  numProcessoSocorro numeric(100) not null,
-		dataHoraInicio datetime not null,
-		dataHoraFim datetime not null,
+		dataHoraInicio timestamp not null,
+		dataHoraFim timestamp not null,
 		dataAuditoria date not null,
 		texto text,
 	  constraint fk_audita_coordenador foreign key(idCoordenador) references coordenador(idCoordenador),
@@ -163,10 +163,10 @@ create table audita
 
 create table solicita 
 	( idCoordenador int not null,
-	  dataHoraInicioVideo datetime not null unique,
+	  dataHoraInicioVideo timestamp not null unique,
 	  numCamara numeric(3) not null unique,
-	  dataHoraInicio datetime not null,
-	  dataHoraFim datetime not null,
+	  dataHoraInicio timestamp not null,
+	  dataHoraFim timestamp not null,
 	  constraint fk_solicita_coordenador foreign key(idCoordenador) references coordenador(idCoordenador),
   	constraint fk_solicita_video foreign key(numCamara) references video(numCamara),
   	constraint fk_solicita_video foreign key(dataHoraInicioVideo) references video(dataHoraInicioVideo)
