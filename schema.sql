@@ -1,37 +1,37 @@
-drop table if exists camara;
-drop table if exists video;
-drop table if exists segmentoVideo;
-drop table if exists local;
-drop table if exists vigia;
-drop table if exists eventoEmergencia;
-drop table if exists processoSocorro;
-drop table if exists entidadeMeio; 
-drop table if exists meio;
-drop table if exists meioCombate;
-drop table if exists meioApoio;
-drop table if exists meioSocorro;
-drop table if exists transporta;
-drop table if exists alocado;
-drop table if exists acciona;
-drop table if exists coordenador;
-drop table if exists audita;
-drop table if exists solicita;
+drop table if exists camara cascade;
+drop table if exists video cascade;
+drop table if exists segmentoVideo cascade;
+drop table if exists local cascade;
+drop table if exists vigia cascade;
+drop table if exists processoSocorro cascade;
+drop table if exists eventoEmergencia cascade;
+drop table if exists entidadeMeio cascade; 
+drop table if exists meio cascade;
+drop table if exists meioCombate cascade;
+drop table if exists meioApoio cascade;
+drop table if exists meioSocorro cascade;
+drop table if exists transporta cascade;
+drop table if exists alocado cascade;
+drop table if exists acciona cascade;
+drop table if exists coordenador cascade;
+drop table if exists audita cascade;
+drop table if exists solicita cascade;
 
 ------------------------------------------------
 --  TABLE CREATION
 ------------------------------------------------
 
 
-create table camara ( 
+create table camara( 
 	numCamara numeric(3) not null unique,
-	primary key(numCamaram)
+	primary key(numCamara)
 );
 
 create table video(
 	dataHoraInicio timestamp not null unique,
 	dataHoraFim timestamp not null,
 	numCamara numeric(3) not null unique,
-	primary key(dataHoraInicio),
+	primary key(dataHoraInicio, numCamara),
 	foreign key(numCamara) references camara(numCamara) ON UPDATE CASCADE
 ); 
 
@@ -40,6 +40,7 @@ create table segmentoVideo (
 	duracao time not null,
 	dataHoraInicio timestamp not null unique,
 	numCamara numeric(3) not null unique,
+	primary key(numSegmento, dataHoraInicio, numCamara),
 	foreign key(dataHoraInicio) references video(dataHoraInicio) ON UPDATE CASCADE,
 	foreign key(numCamara) references video(numCamara) ON UPDATE CASCADE
 );
@@ -52,18 +53,9 @@ create table local(
 create table vigia(
 	moradaLocal varchar(255) not null unique,
 	numCamara numeric(3) not null unique,
+	primary key(moradaLocal, numCamara),
 	foreign key(moradaLocal) references local(moradaLocal) ON UPDATE CASCADE,
 	foreign key(numCamara) references camara(numCamara) ON UPDATE CASCADE
-);
-
-create table eventoEmergencia(
-	numTelefone numeric(15) not null unique,
-	instanteChamada time not null,
-	nomePessoa varchar(80) not null unique,
-	moradaLocal varchar(255) not null,
-	numProcessoSocorro numeric(100) not null,
-	foreign key(moradaLocal) references local(moradaLocal) ON UPDATE CASCADE,
-	foreign key(numProcessoSocorro) references processoSocorro(numProcessoSocorro) ON UPDATE CASCADE
 );
 
 create table processoSocorro( 
@@ -71,17 +63,29 @@ create table processoSocorro(
 	primary key(numProcessoSocorro)
 );
 
+
+create table eventoEmergencia(
+	numTelefone numeric(15) not null unique,
+	instanteChamada time not null,
+	nomePessoa varchar(80) not null unique,
+	moradaLocal varchar(255) not null,
+	numProcessoSocorro numeric(100) not null,
+	primary key(numTelefone, instanteChamada),
+	foreign key(moradaLocal) references local(moradaLocal) ON UPDATE CASCADE,
+	foreign key(numProcessoSocorro) references processoSocorro(numProcessoSocorro) ON UPDATE CASCADE
+);
+
+
 create table entidadeMeio( 
 	nomeEntidade varchar(255) not null unique,
 	primary key(nomeEntidade)
 );
 
 create table meio( 
-	numMeio numeric(100) not null,
-	nomeMeio varchar(255) not null unique,
+	numMeio numeric(100) not null unique,
+	nomeMeio varchar(255) not null,
 	nomeEntidade varchar(255) not null unique,
-	primary key(numMeio), 
-	primary key(nomeEntidade),
+	primary key(numMeio, nomeEntidade),
 	foreign key(nomeEntidade) references entidadeMeio(nomeEntidade) ON UPDATE CASCADE
 );
 
@@ -89,22 +93,22 @@ create table meio(
 create table meioCombate( 
 	numMeio numeric(100) not null,
 	nomeEntidade varchar(255) not null,
-	foreign key(numMeio) references meio(numMeio) ON UPDATE CASCADE,
-	foreign key(nomeEntidade) references meio(nomeEntidade) ON UPDATE CASCADE
+	primary key (numMeio, nomeEntidade),
+	foreign key(numMeio, nomeEntidade) references meio(numMeio, nomeEntidade) ON UPDATE CASCADE
 );
 
 create table meioApoio( 
 	numMeio numeric(100) not null,
 	nomeEntidade varchar(255) not null,
-	foreign key(numMeio) references meio(numMeio) ON UPDATE CASCADE,
-	foreign key(nomeEntidade) references meio(nomeEntidade) ON UPDATE CASCADE
+	primary key (numMeio, nomeEntidade),
+	foreign key(numMeio, nomeEntidade) references meio(numMeio, nomeEntidade) ON UPDATE CASCADE
 );
 
 create table meioSocorro( 
 	numMeio numeric(100) not null,
 	nomeEntidade varchar(255) not null,
-	foreign key(numMeio) references meio(numMeio) ON UPDATE CASCADE,
-	foreign key(nomeEntidade) references meio(nomeEntidade) ON UPDATE CASCADE
+	primary key (numMeio, nomeEntidade),
+	foreign key(numMeio, nomeEntidade) references meio(numMeio, nomeEntidade) ON UPDATE CASCADE
 );
 
 create table transporta( 
@@ -112,8 +116,8 @@ create table transporta(
 	nomeEntidade varchar(255) not null,
 	numVitimas numeric(100) not null,
 	numProcessoSocorro numeric(100) not null,
-	foreign key(numMeio) references meioSocorro(numMeio) ON UPDATE CASCADE,
-	foreign key(nomeEntidade) references meioSocorro(nomeEntidade) ON UPDATE CASCADE,
+	primary key(numMeio, nomeEntidade, numProcessoSocorro),
+	foreign key(numMeio, nomeEntidade) references meioSocorro(numMeio, nomeEntidade) ON UPDATE CASCADE,
 	foreign key(numProcessoSocorro) references processoSocorro(numProcessoSocorro) ON UPDATE CASCADE
 );
 
@@ -122,47 +126,46 @@ create table alocado(
 	nomeEntidade varchar(255) not null,
 	numHoras numeric(3) not null,
 	numProcessoSocorro numeric(100) not null,
-	foreign key(numMeio) references meioApoio(numMeio) ON UPDATE CASCADE,
-	foreign key(nomeEntidade) references meioApoio(nomeEntidade) ON UPDATE CASCADE,
+	primary key(numMeio, nomeEntidade, numProcessoSocorro),
+	foreign key(numMeio, nomeEntidade) references meioApoio(numMeio, nomeEntidade) ON UPDATE CASCADE,
   	foreign key(numProcessoSocorro) references processoSocorro(numProcessoSocorro) ON UPDATE CASCADE
 );
 
 create table acciona( 
 	numMeio numeric(100) not null,
-	nomeEntidade varchar(255) not null, -- FIXME: unique ??
+	nomeEntidade varchar(255) not null,
 	numProcessoSocorro numeric(100) not null,
-	foreign key(numMeio) references meio(numMeio) ON UPDATE CASCADE,
-	foreign key(nomeEntidade) references meio(nomeEntidade) ON UPDATE CASCADE,
+	primary key(numMeio, nomeEntidade, numProcessoSocorro),
+	foreign key(numMeio, nomeEntidade) references meio(numMeio, nomeEntidade) ON UPDATE CASCADE,
 	foreign key(numProcessoSocorro) references processoSocorro(numProcessoSocorro) ON UPDATE CASCADE
 );
 
 create table coordenador( 
-	idCoordenador int not null,
+	idCoordenador int not null unique,
 	primary key(idCoordenador)
 );
 
 create table audita( 
 	idCoordenador int not null,
 	numMeio numeric(100) not null,
-	nomeEntidade varchar(255) not null, -- FIXME: unique ??
+	nomeEntidade varchar(255) not null,
 	numProcessoSocorro numeric(100) not null,
 	dataHoraInicio timestamp not null,
 	dataHoraFim timestamp not null,
 	dataAuditoria date not null,
 	texto text,
+	primary key(idCoordenador, numMeio, nomeEntidade, numProcessoSocorro),
 	foreign key(idCoordenador) references coordenador(idCoordenador) ON UPDATE CASCADE,
-	foreign key(numMeio) references acciona(numMeio) ON UPDATE CASCADE,
-  	foreign key(nomeEntidade) references acciona(nomeEntidade) ON UPDATE CASCADE,
-    foreign key(numProcessoSocorro) references acciona(numProcessoSocorro) ON UPDATE CASCADE
+	foreign key(numMeio, nomeEntidade, numProcessoSocorro) references acciona(numMeio, nomeEntidade, numProcessoSocorro) ON UPDATE CASCADE
 );
 
 create table solicita( 
-	idCoordenador int not null,
-	dataHoraInicioVideo timestamp not null unique,
+	idCoordenador int not null unique,
+	dataHoraInicio timestamp not null unique,
 	numCamara numeric(3) not null unique,
-	dataHoraInicio timestamp not null,
-	dataHoraFim timestamp not null,
+	dataHoraInicioSolicita timestamp not null,
+	dataHoraFimSolicita timestamp not null,
+	primary key(idCoordenador, dataHoraInicio, numCamara),
 	foreign key(idCoordenador) references coordenador(idCoordenador) ON UPDATE CASCADE,
-  	foreign key(numCamara) references video(numCamara) ON UPDATE CASCADE,
-  	foreign key(dataHoraInicioVideo) references video(dataHoraInicioVideo) ON UPDATE CASCADE
+  	foreign key(dataHoraInicio, numCamara) references video(dataHoraInicio, numCamara) ON UPDATE CASCADE
 );
