@@ -50,7 +50,7 @@ def generatelistname(n):
 
 
 def generatelistentity(n):
-    baseline = ["bombeiros", "exército", "força aérea", "polícia", "município"]
+    baseline = ["bombeiros", "exercito", "forca aerea", "policia", "municipio"]
     names = []
     for i in range(n):
         ind = randint(0, 4)
