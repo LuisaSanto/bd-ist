@@ -6,10 +6,10 @@ from random import randint
 import string
 
 tables = np.array(["camara", "video", "segmentoVideo", \
-		"local", "vigia", "eventoEmergencia", "processoSocorro", \
-		"entidadeMeio", "meio", "meioCombate", "meioApoio", \
-		"meioSocorro", "transporta", "alocado", "acciona", \
-		"coordenador", "audita", "solicita"])
+    "local", "vigia", "processoSocorro", "eventoEmergencia", \
+    "entidadeMeio", "meio", "meioCombate", "meioApoio",\
+    "meioSocorro", "transporta", "alocado", "acciona", \
+    "coordenador", "audita", "solicita"])
 
 meios = ["Socorro", "Apoio", "Combate"]
 
