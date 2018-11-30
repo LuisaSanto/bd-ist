@@ -20,10 +20,10 @@
         foreach($result as $row)
         {
             echo("<tr>\n");
-            echo("<td>{$row['numMeio']}</td>\n");
-            echo("<td>{$row['nomeMeio']}</td>\n");
-            echo("<td>{$row['nomeEntidade']}</td>\n");
-            echo("<td><a href=\"removermeios.php?numMeio={$row['numMeio']}&nomeEntidade={$row['nomeEntidade']}\">Remover Meios</a></td>\n");
+            echo("<td>{$row['nummeio']}</td>\n");
+            echo("<td>{$row['nomemeio']}</td>\n");
+            echo("<td>{$row['nomeentidade']}</td>\n");
+            echo("<td><a href=\"removermeios.php?nummeio={$row['nummeio']}&nomeentidade={$row['nomeentidade']}\">Remover Meios</a></td>\n");
             echo("</tr>\n");
         }
 

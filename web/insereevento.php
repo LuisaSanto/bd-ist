@@ -1,11 +1,11 @@
 <html>
     <body>
 <?php
-    $numProcessoSocorro = $_REQUEST['numProcessoSocorro'];
-    $numTelefone = $_REQUEST['numTelefone'];
-    $instanteChamada = $_REQUEST['instanteChamada'];
-    $nomePessoa = $_REQUEST['nomePessoa'];
-    $moradaLocal = $_REQUEST['moradaLocal'];
+    $numprocessosocorro = $_REQUEST['numprocessosocorro'];
+    $numtelefone = $_REQUEST['numtelefone'];
+    $instantechamada = $_REQUEST['instantechamada'];
+    $nomepessoa = $_REQUEST['nomepessoa'];
+    $moradalocal = $_REQUEST['moradalocal'];
     try
     {
         $host = "db.ist.utl.pt";
@@ -16,9 +16,9 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $db->query("start transaction;");
-        $sql = "INSERT INTO eventoEmergencia (numTelefone, instanteChamada, nomePessoa, moradaLocal, numProcessoSocorro) VALUES (?,?,?,?,?);";
+        $sql = "INSERT INTO eventoemergencia (numtelefone, instantechamada, nomepessoa, moradalocal, numprocessosocorro) VALUES (?,?,?,?,?);";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($numTelefone, $instanteChamada, $nomePessoa, $moradaLocal, $numProcessoSocorro));
+        $stmt->execute(array($numtelefone, $instantechamada, $nomepessoa, $moradalocal, $numprocessosocorro));
         $db->query("commit;");
 
         $db = null;

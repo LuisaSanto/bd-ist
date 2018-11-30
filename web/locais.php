@@ -12,7 +12,8 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "SELECT * FROM local;"; 
-        $result = $db->query($sql);
+        
+        $result = $db->prepare($sql);
         $result->execute();
 
         echo("<table border=\"0\" cellspacing=\"10\">\n");
@@ -22,8 +23,8 @@
         foreach($result as $row)
         {
             echo("<tr>\n");
-            echo("<td>{$row['moradaLocal']}</td>\n");
-            echo("<td><a href=\"removerlocal.php?moradaLocal={$row['moradaLocal']}\">Remover Local</a></td>\n");
+            echo("<td>{$row['moradalocal']}</td>");
+            echo("<td><a href=\"removerlocal.php?moradalocal={$row['moradalocal']}\">Remover Local</a></td>\n");
             echo("</tr>\n");
         }
         echo("<td><a href=\"index.php\">Voltar para o inicio</a></td>\n");

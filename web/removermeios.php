@@ -1,8 +1,8 @@
 <html>
     <body>
 <?php
-    $numMeio = $_REQUEST['numMeio'];
-    $nomeEntidade = $_REQUEST['nomeEntidade'];
+    $nummeio = $_REQUEST['nummeio'];
+    $nomeentidade = $_REQUEST['nomeentidade'];
     try
     {
         $host = "db.ist.utl.pt";
@@ -13,9 +13,9 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $db->query("start transaction;");
-        $sql = "DELETE FROM meio WHERE numMeio=? AND nomeEntidade=?";
+        $sql = "DELETE FROM meio WHERE nummeio=? AND nomeentidade=?";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($numMeio, $nomeEntidade));
+        $stmt->execute(array($nummeio, $nomeentidade));
         $db->query("commit;");
 
         $db = null;

@@ -19,9 +19,9 @@
         foreach($result as $row)
         { 
             echo("<tr>\n");
-            echo("<td>{$row['numMeio']}</td>\n");
-            echo("<td>{$row['nomeEntidade']}</td>\n");
-            echo("<td><a href=\"inserecombate.php?numMeio={$row['numMeio']}&nomeEntidade={$row['nomeEntidade']}\">Escolher meios</a></td>\n");
+            echo("<td>{$row['nummeio']}</td>\n");
+            echo("<td>{$row['nomeentidade']}</td>\n");
+            echo("<td><a href=\"inserecombate.php?nummeio={$row['nummeio']}&nomeentidade={$row['nomeentidade']}\">Escolher meios</a></td>\n");
             echo("</tr>\n");
         }
         echo("<td><a href=\"index.php\">Voltar para o inicio</a></td>\n");

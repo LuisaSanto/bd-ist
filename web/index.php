@@ -11,7 +11,7 @@
         echo("<td><a href=\"locais.php\">Adicionar ou Remover Locais</a></td>\n");
         echo("</tr>\n"); 
         echo("<tr>\n");
-        echo("<td><a href=\"eventosdeemergencia.php\">Adicionar ou Remover Eventos de Emergência</a></td>\n");
+        echo("<td><a href=\"eventosdeemergencia.php\">Adicionar ou Remover Eventos de Emergencia</a></td>\n");
         echo("</tr>\n");
         echo("<tr>\n");
         echo("<td><a href=\"processosdesocorro.php\">Adicionar ou Remover Processos de Socorro</a></td>\n");
@@ -41,7 +41,7 @@
         echo("<td><a href=\"associarprocessosameios.php\">Associar Processos de Socorro a Meios</a></td>\n");
         echo("</tr>\n");
         echo("<tr>\n");
-        echo("<td><a href=\"associarprocessosaeventos.php\">Associar Processos de Socorro a Eventos de Emergência</a></td>\n");
+        echo("<td><a href=\"associarprocessosaeventos.php\">Associar Processos de Socorro a Eventos de Emergencia</a></td>\n");
         echo("</tr>\n");
         echo("<tr>\n");
         echo("<td><a href=\"listarmeiosdeumprocesso.php\">Mostrar Meios de um Processo de Socorro </a></td>\n");

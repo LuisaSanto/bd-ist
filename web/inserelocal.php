@@ -1,7 +1,7 @@
 <html>
     <body>
 <?php
-    $moradaLocal = $_REQUEST['moradaLocal'];
+    $moradalocal = $_REQUEST['moradalocal'];
     try
     {
         $host = "db.ist.utl.pt";
@@ -12,9 +12,9 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $db->query("start transaction;");
-        $sql = "INSERT INTO local (moradaLocal) VALUES (?);";
+        $sql = "INSERT INTO local (moradalocal) VALUES (?);";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($moradaLocal));
+        $stmt->execute(array($moradalocal));
         $db->query("commit;");
 
         $db = null;

@@ -12,7 +12,7 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-        $sql = "SELECT * FROM processoSocorro;";
+        $sql = "SELECT * FROM processosocorro;";
         $result = $db->query($sql);
 
         echo("<table border=\"0\" cellspacing=\"10\">\n");
@@ -22,8 +22,8 @@
         foreach($result as $row)
         {
             echo("<tr>\n");
-            echo("<td>{$row['numProcessoSocorro']}</td>\n");
-            echo("<td><a href=\"removerprocessosocorro.php?numProcessoSocorro={$row['numProcessoSocorro']}\">Remover Processo de Socorro</a></td>\n");
+            echo("<td>{$row['numprocessosocorro']}</td>\n");
+            echo("<td><a href=\"removerprocessosocorro.php?numprocessosocorro={$row['numprocessosocorro']}\">Remover Processo de Socorro</a></td>\n");
             echo("</tr>\n");
         }
         echo("<td><a href=\"index.php\">Voltar para o inicio</a></td>\n");

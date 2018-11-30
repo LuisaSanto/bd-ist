@@ -1,7 +1,7 @@
 <html>
     <body>
 <?php
-    $numProcessoSocorro = $_REQUEST['numProcessoSocorro'];
+    $numprocessosocorro = $_REQUEST['numprocessosocorro'];
     try
     {
         $host = "db.ist.utl.pt";
@@ -12,9 +12,9 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $db->query("start transaction;");
-        $sql = "DELETE FROM processoSocorro WHERE numProcessoSocorro=?;";
+        $sql = "DELETE FROM processosocorro WHERE numprocessosocorro=?;";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($numProcessoSocorro));
+        $stmt->execute(array($numprocessosocorro));
         $db->query("commit;");
 
         $db = null;

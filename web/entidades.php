@@ -11,7 +11,7 @@
         $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "SELECT * FROM entidadeMeio;";
+        $sql = "SELECT * FROM entidademeio;";
         $result = $db->query($sql);
 
         echo("<table border=\"0\" cellspacing=\"10\">\n");
@@ -21,8 +21,8 @@
         foreach($result as $row)
         {
             echo("<tr>\n");
-            echo("<td>{$row['nomeEntidade']}</td>\n");
-            echo("<td><a href=\"removeentidade.php?nomeEntidade={$row['nomeEntidade']}\">Remover Entidade</a></td>\n");
+            echo("<td>{$row['nomeentidade']}</td>\n");
+            echo("<td><a href=\"removeentidade.php?nomeentidade={$row['nomeentidade']}\">Remover Entidade</a></td>\n");
             echo("</tr>\n");
         }
         echo("<td><a href=\"index.php\">Voltar para o inicio</a></td>\n");

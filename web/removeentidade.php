@@ -1,7 +1,7 @@
 <html>
     <body>
 <?php
-    $nomeEntidade = $_REQUEST['nomeEntidade'];
+    $nomeentidade = $_REQUEST['nomeentidade'];
     try
     {
         $host = "db.ist.utl.pt";
@@ -12,9 +12,9 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $db->query("start transaction;");
-        $sql = "DELETE FROM entidadeMeio WHERE nomeEntidade=?;";
+        $sql = "DELETE FROM entidademeio WHERE nomeentidade=?;";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($nomeEntidade));
+        $stmt->execute(array($nomeentidade));
         $db->query("commit;");
 
         $db = null;

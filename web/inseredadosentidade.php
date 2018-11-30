@@ -1,7 +1,7 @@
 <html>
     <body>
 <?php
-    $numprocessosocorro = $_REQUEST['numprocessosocorro'];
+    $nomeentidade = $_REQUEST['nomeentidade'];
     try
     {
         $host = "db.ist.utl.pt";
@@ -12,20 +12,20 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $db->query("start transaction;");
-        $sql = "INSERT INTO processosocorro (numprocessosocorro) VALUES (?);";
+        $sql = "INSERT INTO entidademeio (nomeentidade) VALUES (?);";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($numprocessosocorro));
+        $stmt->execute($nomeentidade);
         $db->query("commit;");
 
         $db = null;
-        echo("<p>Processo adicionado com sucesso!</p>");
+        echo("<p>Entidade adicionada com sucesso!</p>");
     }
     catch (PDOException $e)
     {
         $db->query("rollback;");
         echo("<p>ERROR: {$e->getMessage()}</p>");
     }
-    echo("<td><a href=\"processosdesocorro.php\">Voltar para a lista de Processos</a></td>\n");
+    echo("<td><a href=\"eventosdeemergencia.php\">Voltar para a lista de Eventos</a></td>\n");
     echo("<td><a href=\"index.php\">Voltar para o inicio</a></td>\n");
 ?>
     </body>

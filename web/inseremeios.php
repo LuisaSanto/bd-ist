@@ -1,9 +1,9 @@
 <html>
     <body>
 <?php
-    $nomeEntidade = $_REQUEST['nomeEntidade'];
-    $numMeio = $_REQUEST['numMeio'];
-    $nomeMeio = $_REQUEST['nomeMeio'];
+    $nomeentidade = $_REQUEST['nomeentidade'];
+    $nummeio = $_REQUEST['nummeio'];
+    $nomemeio = $_REQUEST['nomemeio'];
     try
     {
         $host = "db.ist.utl.pt"; 
@@ -14,9 +14,9 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $db->query("start transaction;");
-        $sql = "INSERT INTO meio (nomeEntidade, numMeio, nomeMeio) VALUES (?,?,?);";
+        $sql = "INSERT INTO meio (nomeentidade, nummeio, nomemeio) VALUES (?,?,?);";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($nomeEntidade, $numMeio, $nomeMeio));
+        $stmt->execute(array($nomeentidade, $nummeio, $nomemeio));
         $db->query("commit;");
 
         $db = null;

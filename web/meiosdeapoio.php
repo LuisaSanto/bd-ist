@@ -11,7 +11,7 @@
         $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "SELECT * FROM meioApoio;";
+        $sql = "SELECT * FROM meioapoio;";
         $result = $db->query($sql);
 
         echo("<table border=\"0\" cellspacing=\"10\">\n");
@@ -20,9 +20,9 @@
         foreach($result as $row)
         {
             echo("<tr>\n");
-            echo("<td>{$row['numMeio']}</td>\n");
-            echo("<td>{$row['nomeEntidade']}</td>\n");
-            echo("<td><a href=\"removeapoio.php?numMeio={$row['numMeio']}&nomeEntidade={$row['nomeEntidade']}\">Remover Meio de Apoio</a></td>\n");
+            echo("<td>{$row['nummeio']}</td>\n");
+            echo("<td>{$row['nomeentidade']}</td>\n");
+            echo("<td><a href=\"removeapoio.php?nummeio={$row['nummeio']}&nomeentidade={$row['nomeentidade']}\">Remover Meio de Apoio</a></td>\n");
             echo("</tr>\n");
         }
         echo("<td><a href=\"index.php\">Voltar para o inicio</a></td>\n");

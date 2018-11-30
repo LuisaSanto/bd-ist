@@ -19,8 +19,8 @@
         foreach($result as $row)
         {
             echo("<tr>\n");
-            echo("<td>{$row['moradaLocal']}</td>\n");
-            echo("<td><a href=\"mostranumeroprocesso.php?moradaLocal={$row['moradaLocal']}\">Escolher Local</a></td>\n");
+            echo("<td>{$row['moradalocal']}</td>\n");
+            echo("<td><a href=\"mostranumeroprocesso.php?moradalocal={$row['moradalocal']}\">Escolher Local</a></td>\n");
             echo("</tr>\n");
         }
         echo("<td><a href=\"index.php\">Voltar para o inicio</a></td>\n");

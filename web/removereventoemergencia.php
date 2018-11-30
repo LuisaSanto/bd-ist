@@ -1,8 +1,8 @@
 <html>
     <body>
 <?php
-    $numTelefone = $_REQUEST['numTelefone'];
-    $instanteChamada = $_REQUEST['instanteChamada'];
+    $numtelefone = $_REQUEST['numtelefone'];
+    $instantechamada = $_REQUEST['instantechamada'];
     try
     {
         $host = "db.ist.utl.pt";
@@ -13,9 +13,9 @@
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $db->query("start transaction;");
-        $sql = "DELETE FROM eventoEmergencia WHERE numTelefone=? AND instanteChamada=?;";
+        $sql = "DELETE FROM eventoemergencia WHERE numtelefone=? AND instantechamada=?;";
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($numTelefone, $instanteChamada));
+        $stmt->execute(array($numtelefone, $instantechamada));
         $db->query("commit;");
 
         $db = null;
