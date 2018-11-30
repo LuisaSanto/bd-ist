@@ -143,7 +143,7 @@ def populatecoordenador(f, i, j):
 
 
 def populateaudita(f, i, j, entities, entity_names):
-    times_h = randomtimes("13:28:00 2019-01-01", "08:50:34 2019-03-02", '%H:%M:%S %Y-%m-%d', 101)
+    times_h = randomtimes("13:28:00 2018-01-01", "08:50:34 2018-03-02", '%H:%M:%S %Y-%m-%d', 101)
     f.write("insert into {} values ({}, {}, '{}', {}, '{}', '{}', '{}','{}');\n".format(i, j+1, j+1, \
         entities[j], j+1, \
         times_h[j].replace(microsecond=0), \
