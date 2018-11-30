@@ -80,9 +80,8 @@ def populatevigia(f, i, j):
 
 
 def populateeventoemergencia(f, i, j, numbers, names, times):
-    interval = times[j+1].replace(microsecond=0) - times[j].replace(microsecond=0)
     f.write("insert into {} values ({}, '{}', '{}', '{}', {});\n".format(i, \
-        numbers[j], interval, names[j], "address"+str(j+1), j + 1))
+        numbers[j], times[j].replace(microsecond=0), names[j], "address"+str(j+1), j + 1))
 
 
 def populateprocessosocorro(f, i, j):

@@ -66,7 +66,7 @@ create table processoSocorro(
 
 create table eventoEmergencia(  
 	numTelefone numeric(15) not null unique,
-	instanteChamada time not null unique,
+	instanteChamada timestamp not null unique,
 	nomePessoa varchar(80) not null,
 	moradaLocal varchar(255) not null,
 	numProcessoSocorro numeric(100) not null,
