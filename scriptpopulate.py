@@ -155,7 +155,7 @@ def populateaudita(f, i, j, entities, entity_names):
 
 
 def populatesolicita(f, i, j, times):
-    times_h = randomtimes("13:28:00 2019-02-01", "08:50:34 2019-03-02", '%H:%M:%S %Y-%m-%d', 101)
+    times_h = randomtimes("13:28:00 2017-02-01", "08:50:34 2017-03-02", '%H:%M:%S %Y-%m-%d', 101)
     f.write("insert into {} values ({}, '{}', {}, '{}', '{}');\n".format(i, j+1, times[j].replace(microsecond=0), \
         j+1, times_h[j].replace(microsecond=0), times_h[j+1].replace(microsecond=0)))
 

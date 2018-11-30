@@ -1,6 +1,6 @@
 <html>
     <body>
-    <h3>Base de Dados</h3>
+    <h3>Base de Dados</h3> 
     <h3>Inicio</h3>
 <?php
     try
@@ -9,7 +9,7 @@
 
         echo("<tr>\n");
         echo("<td><a href=\"locais.php\">Adicionar ou Remover Locais</a></td>\n");
-        echo("</tr>\n");
+        echo("</tr>\n"); 
         echo("<tr>\n");
         echo("<td><a href=\"eventosdeemergencia.php\">Adicionar ou Remover Eventos de Emergência</a></td>\n");
         echo("</tr>\n");
@@ -36,7 +36,7 @@
         echo("</tr>\n");
         echo("<tr>\n");
         echo("<td><a href=\"listarmeios.php\">Mostrar Meios</a></td>\n");
-        echo("</tr>\n");
+        echo("</tr>\n"); 
         echo("<tr>\n");
         echo("<td><a href=\"associarprocessosameios.php\">Associar Processos de Socorro a Meios</a></td>\n");
         echo("</tr>\n");

@@ -2,7 +2,7 @@
     <body>
     <h3>Locais</h3>
 <?php
-    try
+    try 
     {
         $host = "db.ist.utl.pt";
         $user ="ist179758";
@@ -11,7 +11,7 @@
         $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $sql = "SELECT * FROM local;";
+        $sql = "SELECT * FROM local;"; 
         $result = $db->query($sql);
         $result->execute();
 
@@ -22,11 +22,11 @@
         foreach($result as $row)
         {
             echo("<tr>\n");
-            echo("<td>{$row['morada']}</td>\n");
-            echo("<td><a href=\"removerlocal.php?morada={$row['morada']}\">Remover Local</a></td>\n");
+            echo("<td>{$row['moradaLocal']}</td>\n");
+            echo("<td><a href=\"removerlocal.php?moradaLocal={$row['moradaLocal']}\">Remover Local</a></td>\n");
             echo("</tr>\n");
         }
-        echo("<td><a href=\"inicio.php\">Voltar para o inicio</a></td>\n");
+        echo("<td><a href=\"index.php\">Voltar para o inicio</a></td>\n");
         echo("</table>\n");
 
         $db = null;

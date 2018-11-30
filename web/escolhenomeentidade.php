@@ -1,6 +1,6 @@
 <html>
     <body>
-    <h3>Processo de socorro</h3>
+    <h3></h3>
 <?php
     try
     {
@@ -11,22 +11,19 @@
         $db = new PDO("pgsql:host=$host;dbname=$dbname", $user, $password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
-        $sql = "SELECT * FROM processoSocorro;";
+        $sql = "SELECT * FROM entidadeMeio;";
         $result = $db->query($sql);
 
         echo("<table border=\"0\" cellspacing=\"10\">\n");
-        echo("<tr><td><a href=\"inserenumeroprocesso.php\">Adicionar Processo de Socorro</a></td></tr>\n");
-        echo("<tr><td><b>Numero do Processo</b></td></tr>\n");
-
+        echo("<tr><td><b>Nome da Entidade</b></td></tr>\n");
         foreach($result as $row)
         {
             echo("<tr>\n");
-            echo("<td>{$row['numProcessoSocorro']}</td>\n");
-            echo("<td><a href=\"removerprocessosocorro.php?numProcessoSocorro={$row['numProcessoSocorro']}\">Remover Processo de Socorro</a></td>\n");
+            echo("<td>{$row['nomeEntidade']}</td>\n");
+            echo("<td><a href=\"inseredadosmeios.php?nomeEntidade={$row['nomeEntidade']}\">Escolher Nome da Entidade</a></td>\n");
             echo("</tr>\n");
         }
-        echo("<td><a href=\"index.php\">Voltar para o inicio</a></td>\n");
+        echo("<td><a href=\"inicio.php\">Voltar para o inicio</a></td>\n");
         echo("</table>\n");
 
         $db = null;

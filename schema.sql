@@ -30,7 +30,7 @@ create table camara(
 create table video(
 	dataHoraInicio timestamp not null unique,
 	dataHoraFim timestamp not null,
-	numCamara numeric(3) not null unique,
+	numCamara numeric(3) not null unique, 
 	primary key(dataHoraInicio, numCamara),
 	foreign key(numCamara) references camara(numCamara) ON UPDATE CASCADE
 ); 
@@ -58,16 +58,16 @@ create table vigia(
 	foreign key(numCamara) references camara(numCamara) ON UPDATE CASCADE
 );
 
-create table processoSocorro( 
+create table processoSocorro(  
 	numProcessoSocorro numeric(100) not null unique,
 	primary key(numProcessoSocorro)
 );
 
 
-create table eventoEmergencia(
+create table eventoEmergencia(  
 	numTelefone numeric(15) not null unique,
-	instanteChamada time not null,
-	nomePessoa varchar(80) not null unique,
+	instanteChamada time not null unique,
+	nomePessoa varchar(80) not null,
 	moradaLocal varchar(255) not null,
 	numProcessoSocorro numeric(100) not null,
 	primary key(numTelefone, instanteChamada),
