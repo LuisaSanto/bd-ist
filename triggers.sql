@@ -65,14 +65,20 @@ EXECUTE PROCEDURE coordenador_nao_pode_solicitar();
 CREATE OR REPLACE FUNCTION apoio_nao_pode_alocar() RETURNS TRIGGER AS
 $$
 	BEGIN
-
+		IF NOT (EXISTS (
+			SELECT * from meioapoio NATURAL JOIN acciona NATURAL JOIN processosocorro 
+			WHERE numprocessosocorro IN(
+				SELECT numprocessosocorro FROM alocado)))
+		THEN RAISE 'O coordenador nao accionou o evento correspondente a camara solicitada'
+			USING HINT = 'ver lista de coordenador';
+		END IF;
 	RETURN NULL;
 	END;
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS update_aloca_processo ON ??;
+DROP TRIGGER IF EXISTS update_aloca_processo ON alocado;
 CREATE TRIGGER update_aloca_processo
-BEFORE INSERT OR UPDATE ON ??
+BEFORE INSERT OR UPDATE ON alocado
 FOR EACH ROW
 EXECUTE PROCEDURE apoio_nao_pode_alocar();
 
