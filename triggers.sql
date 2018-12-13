@@ -44,12 +44,11 @@ CREATE OR REPLACE FUNCTION coordenador_nao_pode_solicitar() RETURNS TRIGGER AS
 $$
 	BEGIN
 		IF NOT (EXISTS (SELECT numcamara FROM solicita WHERE numcamara IN(
-						SELECT numcamara FROM vigia WHERE moradalocal IN(
-							SELECT moradalocal FROM eventoemergencia WHERE numprocessosocorro IN(
-								SELECT numprocessosocorro FROM acciona WHERE numprocessosocorro IN(
-									SELECT numprocessosocorro 
-									FROM solicita s, audita a WHERE s.idcoordenador = a.idcoordenador)))))) THEN
-			RAISE 'O coordenador nao accionou o evento correspondente a camara solicitada'
+						SELECT numcamara FROM vigia NATURAL JOIN eventoemergencia NATURAL JOIN acciona 
+						WHERE numprocessosocorro IN(
+							SELECT numprocessosocorro 
+							FROM solicita s, audita a WHERE s.idcoordenador = a.idcoordenador))))
+		THEN RAISE 'O coordenador nao accionou o evento correspondente a camara solicitada'
 			USING HINT = 'ver lista de coordenador';
 		END IF;
 	RETURN NULL;
