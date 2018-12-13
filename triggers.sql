@@ -69,8 +69,8 @@ $$
 			SELECT * from meioapoio NATURAL JOIN acciona NATURAL JOIN processosocorro 
 			WHERE numprocessosocorro IN(
 				SELECT numprocessosocorro FROM alocado)))
-		THEN RAISE 'O coordenador nao accionou o evento correspondente a camara solicitada'
-			USING HINT = 'ver lista de coordenador';
+		THEN RAISE 'O meio de apoio nao pode alocar processos de socorro nao selecionados por eles'
+			USING HINT = 'ver lista acciona';
 		END IF;
 	RETURN NULL;
 	END;
