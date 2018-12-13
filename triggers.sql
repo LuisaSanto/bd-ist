@@ -38,3 +38,42 @@ CREATE TRIGGER update_auditoria
 BEFORE INSERT OR UPDATE ON audita
 FOR EACH ROW
 EXECUTE PROCEDURE datas_mal_formatadas();
+
+-- R3: Um Coordenador só pode solicitar vídeos de câmaras colocadas num local cujo accionamento de meios esteja a ser (ou tenha sido) auditado por ele proprio
+CREATE OR REPLACE FUNCTION coordenador_nao_pode_solicitar() RETURNS TRIGGER AS
+$$
+	BEGIN
+		IF NOT (EXISTS (SELECT numcamara FROM solicita WHERE numcamara IN(
+						SELECT numcamara FROM vigia WHERE moradalocal IN(
+							SELECT moradalocal FROM eventoemergencia WHERE numprocessosocorro IN(
+								SELECT numprocessosocorro FROM acciona WHERE numprocessosocorro IN(
+									SELECT numprocessosocorro 
+									FROM solicita s, audita a WHERE s.idcoordenador = a.idcoordenador)))))) THEN
+			RAISE 'O coordenador nao accionou o evento correspondente a camara solicitada'
+			USING HINT = 'ver lista de coordenador';
+		END IF;
+	RETURN NULL;
+	END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS update_solicita_coordenador ON solicita;
+CREATE TRIGGER update_solicita_coordenador
+BEFORE INSERT OR UPDATE ON solicita
+FOR EACH ROW
+EXECUTE PROCEDURE coordenador_nao_pode_solicitar();
+
+-- R4:Um Meio de Apoio só pode ser alocado a Processos de Socorro para os quais tenha sido accionado
+CREATE OR REPLACE FUNCTION apoio_nao_pode_alocar() RETURNS TRIGGER AS
+$$
+	BEGIN
+
+	RETURN NULL;
+	END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS update_aloca_processo ON ??;
+CREATE TRIGGER update_aloca_processo
+BEFORE INSERT OR UPDATE ON ??
+FOR EACH ROW
+EXECUTE PROCEDURE apoio_nao_pode_alocar();
+
